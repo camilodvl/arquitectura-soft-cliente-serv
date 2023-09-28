@@ -29,10 +29,35 @@ app.post("/", async(req, res)=>{
 
 } )
 
+
+//update
 app.put("/:id", async(req, res)=>{
-  
+  try {
+    const {id}= req.params;
+    const persona = await Persona.findByIdAndUpdate(id, req.body);
+    res.json("Persona actualizada")
+    
+  } catch (error) {
+    res.json(error.message)
+  }
+
 
 })
+
+//delete
+app.delete("/:id", async(req, res)=>{
+  try {
+    const {id}= req.params;
+    const persona = await Persona.findByIdAndRemove(id);
+    res.json("Persona eliminada")
+    
+  } catch (error) {
+    res.json(error.message)
+  }
+
+
+})
+
 
 //conexión a la bd
 mongoose.connect(
