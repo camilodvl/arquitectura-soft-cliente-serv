@@ -47,9 +47,9 @@ app.put("/:id", async(req, res)=>{
 })
 
 //delete
-app.delete("/:id", async(req, res)=>{
+app.delete("/delete", async(req, res)=>{
   try {
-    const {id}= req.params;
+    const {id}= req.body;
     const persona = await Persona.findByIdAndRemove(id);
     res.json("Persona eliminada")
     
