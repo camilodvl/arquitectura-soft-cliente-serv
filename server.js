@@ -1,12 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
 import Persona from "./models/persona.js";
+import cors from "cors";
 
 //se crea el servidor
 const app = express();
 
 //middleware
 app.use(express.json())
+app.use(cors());
 
 //ruta get /
 app.get("/", async(req, res) => {
@@ -16,7 +18,7 @@ app.get("/", async(req, res) => {
 
 
 //ruta post
-app.post("/", async(req, res)=>{
+app.post("/new", async(req, res)=>{
   try{
     const persona = await Persona.create(req.body);
     res.json({
