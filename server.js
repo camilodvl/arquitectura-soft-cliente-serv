@@ -33,9 +33,9 @@ app.post("/new", async(req, res)=>{
 
 
 //update
-app.put("/:id", async(req, res)=>{
+app.put("/update", async(req, res)=>{
   try {
-    const {id}= req.params;
+    const {id, name, apellido }= req.body;
     const persona = await Persona.findByIdAndUpdate(id, req.body);
     res.json("Persona actualizada")
     
@@ -45,6 +45,7 @@ app.put("/:id", async(req, res)=>{
 
 
 })
+
 
 //delete
 app.delete("/delete", async(req, res)=>{
@@ -58,6 +59,17 @@ app.delete("/delete", async(req, res)=>{
   }
 
 
+})
+
+
+app.get("/get/:id", async (req,res)=>{
+  const { id } = req.params;
+  try {
+    const persona = await Persona.findById(id);
+    res.send(persona);
+  } catch (error) {
+    res.json(error)
+  }
 })
 
 
